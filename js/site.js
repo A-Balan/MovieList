@@ -83,11 +83,9 @@ async function showMovieDetails(btn) {
 
     let movieDetails = await getDetails(movieId);
 
-    document.getElementById('modal-title').innerHTML = `<h5>${movieDetails.title}</h5>`;
+
+    document.getElementById('modal-title').textContent = movieDetails.title;
 
     document.getElementById('movie-modal-paragraph').innerHTML = `<p>Tagline: ${movieDetails.tagline}`;
-    document.getElementById('movie-modal-paragraph').innerHTML = `<p>Release Date: ${movieDetails.release_date}`;
-   
-
 
 }

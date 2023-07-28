@@ -47,13 +47,13 @@
                             <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">The Repository(link)</a>
+                            <a class="nav-link" href="https://github.com/A-Balan/MovieList">The Repository</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://abalan.netlify.app/">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog link</a>
+                            <a class="nav-link" href="#">Blog</a>
                         </li>
                     </ul>
                 </div>
@@ -68,27 +68,114 @@
             <div class="col-12 col-md-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
+                        const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdmYzY4ZjQyMTkzZjQ3MzY5YzQ4MmE4ZWUyOTRhYiIsInN1YiI6IjY0YzE2ODgwMDk3YzQ5MDBjNjQzMmZhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tpfGC08xJulq-UYFETixY1zP_Q07lrXjaPUxinVCoYk';
 
-                            let inputBox = document.getElementById("message");
+                        // https://api.themoviedb.org/3/movie/popular
                         
-                            let message = inputBox.value;
+                        async function getMovies() {
                         
-                            Swal.fire(
-                                {
-                                    backdrop: false,
-                                    title: "Movie List",
-                                    text: message
-                                }
-                            );
+                            try {
+                                let response = await fetch('https://api.themoviedb.org/3/movie/popular',
+                                    {
+                                        headers: {
+                                            'Authorization': `Bearer ${API_KEY}`
+                                        }
+                                    }
+                                );
+                        
+                                let data = await response.json();
+                        
+                                return data;
+                        
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+                        
+                        
+                        async function getDetails(movieId) {
+                            try {
+                                let response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}`,
+                                    {
+                                        headers: {
+                                            'Authorization': `Bearer ${API_KEY}`
+                                        }
+                                    }
+                                );
+                        
+                                let details = await response.json();
+                        
+                                return details;
+                        
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+                        
+                        
+                        
+                        async function displayMovies() {
+                        
+                            const movieListDiv = document.getElementById('movie-list');
+                            const moviePosterTemplate = document.getElementById('movie-card-template');
+                        
+                            let data = await getMovies();
+                        
+                            let movies = data.results;
+                            // movies is an array of objects
+                            movies.forEach(movie => {
+                                let movieCard = moviePosterTemplate.content.cloneNode(true);
+                        
+                                let titleElement = movieCard.querySelector('.card-body > h5');
+                                titleElement.textContent = movie.title;
+                        
+                                let movieParagraphElement = movieCard.querySelector('.card-text');
+                                movieParagraphElement.textContent = movie.overview;
+                        
+                                let movieImgElement = movieCard.querySelector('.card img');
+                                movieImgElement.setAttribute('src', `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+                        
+                        
+                                let infoButton = movieCard.querySelector('button.btn');
+                        
+                                infoButton.setAttribute('data-movieId', movie.id);
+                        
+                                movieListDiv.appendChild(movieCard);
+                        
+                        
+                            });
+                        
+                        }
+                        
+                        async function showMovieDetails(btn) {
+                        
+                            let movieId = btn.getAttribute('data-movieId');
+                        
+                            let movieDetails = await getDetails(movieId);
+                        
+                        
+                            document.getElementById('modal-title').textContent = movieDetails.title;
+                        
+                            document.getElementById('movie-modal-paragraph').innerHTML = `<p>Tagline: ${movieDetails.tagline}`;
+                        
                         }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-md-4">
-                <p>The code is structured in one function</p>
-                <h5>displayMessage</h5>
-                <p>Shows a SweetAlert with the value of the <code>message</code> variable</p>
+                <h5>Walkthrough</h5>
+                <ul>
+                    <li>getMovies() is fetching a top 20 popular movies list</li>
+                    <li>an API key and authorization is provided </li>
+                    <li>the request is formatted as an async function, as it takes some time to execute</li>
+                    <li>a try{}catch{} structure is used, to log an error message in case a server is down</li>
+                    <li>get Details() retrieves details about any movie, based on its Id being the parameter</li>
+                    <li>In displayMovies(), for each movie in the list, a template is cloned</li>
+                    <li>The cloned template is filled out with properties of each movie, title, overview, image, as listed in the API reference</li>
+                    <li>querySelector is used to attatch the id of each movie to it's respective button</li>
+                    <li>The button triggers a modal to appear, which has the information from getDetails() such as tagline, release-date, revenue</li>
+                    <li>The info is displayed dynamically and on our responsive modal</li>
+                </ul>
             </div>
         </div>
     </main>

@@ -46,13 +46,13 @@
                             <a class="nav-link" href="/code.html">The Code</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">The Repository(link)</a>
+                            <a class="nav-link" href="https://github.com/A-Balan/MovieList">The Repository</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://abalan.netlify.app/">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog link</a>
+                            <a class="nav-link" href="#">Blog</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@
     </footer>
 
     <template id="movie-card-template">
-        <div class="col">
+        <div class="col py-2">
             <div class="card h-100">
                 <img class="card-img-top" alt="Movie Poster" src="#" />
                 <div class="card-body border-top bg-light">
@@ -113,10 +113,10 @@
     <!-- modal -->
 
     <div class="modal" tabindex="-1" id="movie-modal">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Title</h5>
+                    <h5 id="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
