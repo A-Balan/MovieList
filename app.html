@@ -113,14 +113,17 @@
     <!-- modal -->
 
     <div class="modal" tabindex="-1" id="movie-modal">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 id="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p id="movie-modal-paragraph"></p>
+                <div class="modal-body row-cols-auto">
+                   <div class="col">
+                    <img id="modal-img"/>
+                   </div> 
+                   <div class="col"><p id="movie-modal-paragraph"></p></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

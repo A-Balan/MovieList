@@ -85,7 +85,9 @@ async function showMovieDetails(btn) {
 
 
     document.getElementById('modal-title').textContent = movieDetails.title;
-
+    
+    document.getElementById('modal-img').src = `https://image.tmdb.org/t/p/w500${move.poster_path}`;
+    
     document.getElementById('movie-modal-paragraph').innerHTML = `<p>Tagline: ${movieDetails.tagline}`;
 
 }
