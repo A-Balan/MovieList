@@ -1,4 +1,4 @@
-const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdmYzY4ZjQyMTkzZjQ3MzY5YzQ4MmE4ZWUyOTRhYiIsInN1YiI6IjY0YzE2ODgwMDk3YzQ5MDBjNjQzMmZhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tpfGC08xJulq-UYFETixY1zP_Q07lrXjaPUxinVCoYk'
+const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdmYzY4ZjQyMTkzZjQ3MzY5YzQ4MmE4ZWUyOTRhYiIsInN1YiI6IjY0YzE2ODgwMDk3YzQ5MDBjNjQzMmZhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tpfGC08xJulq-UYFETixY1zP_Q07lrXjaPUxinVCoYk';
 
 // https://api.themoviedb.org/3/movie/popular
 
@@ -22,8 +22,30 @@ async function getMovies() {
     }
 }
 
+
+async function getDetails(movieId) {
+    try {
+        let response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${API_KEY}`
+                }
+            }
+        );
+
+        let details = await response.json();
+
+        return details;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
 async function displayMovies() {
-   
+
     const movieListDiv = document.getElementById('movie-list');
     const moviePosterTemplate = document.getElementById('movie-card-template');
 
@@ -37,8 +59,35 @@ async function displayMovies() {
         let titleElement = movieCard.querySelector('.card-body > h5');
         titleElement.textContent = movie.title;
 
+        let movieParagraphElement = movieCard.querySelector('.card-text');
+        movieParagraphElement.textContent = movie.overview;
+
+        let movieImgElement = movieCard.querySelector('.card img');
+        movieImgElement.setAttribute('src', `https://image.tmdb.org/t/p/w500${movie.poster_path}`);
+
+
+        let infoButton = movieCard.querySelector('button.btn');
+
+        infoButton.setAttribute('data-movieId', movie.id);
+
         movieListDiv.appendChild(movieCard);
+
+
     });
 
 }
 
+async function showMovieDetails(btn) {
+
+    let movieId = btn.getAttribute('data-movieId');
+
+    let movieDetails = await getDetails(movieId);
+
+    document.getElementById('modal-title').innerHTML = `<h5>${movieDetails.title}</h5>`;
+
+    document.getElementById('movie-modal-paragraph').innerHTML = `<p>Tagline: ${movieDetails.tagline}`;
+    document.getElementById('movie-modal-paragraph').innerHTML = `<p>Release Date: ${movieDetails.release_date}`;
+   
+
+
+}

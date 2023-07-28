@@ -61,10 +61,11 @@
     </header>
 
     <main class="container py-3">
-       <button class="btn btn-primary" onclick="displayMovies()">What are the top movies?</button>
-        <h1 class="text-center mt-5 display-3">Currently Trending Movies</h1>
+        <h1 class="text-center mt-5 display-3">Currently Trending Movies
+        </h1>
+
         <div class="row row-cols-1 row-cols-sm-2 wor-cols-lg-3 row-cols-xl-4" id="movie-list">
-            
+
         </div>
     </main>
 
@@ -89,24 +90,45 @@
 
     <template id="movie-card-template">
         <div class="col">
-            <div class="card">
-                <img class="card-img-top" alt="Movie Poster"
-                    src="#" />
+            <div class="card h-100">
+                <img class="card-img-top" alt="Movie Poster" src="#" />
                 <div class="card-body border-top bg-light">
                     <h5>
                         <!-- Movie Title -->
                     </h5>
-                    
+
                     <p class="card-text">
                         <!-- Movie Description -->
                     </p>
                 </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" data-bs-target="#movie-modal" data-bs-toggle="modal"
+                        onclick="showMovieDetails(this)">More Info</button>
+                </div>
             </div>
-            <div class="card-footer text-end">
-                <a href="#" class="btn btn-primary">More Info</a>
-            </div>
+
         </div>
     </template>
+
+    <!-- modal -->
+
+    <div class="modal" tabindex="-1" id="movie-modal">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="movie-modal-paragraph"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- bootstrapJS link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
@@ -119,7 +141,7 @@
     <script src="/js/site.js"></script>
 
     <script>
-        document.getElementById('btnSubmit').addEventListener("click", displayMessage);
+        displayMovies();
     </script>
 </body>
 
