@@ -83,11 +83,38 @@ async function showMovieDetails(btn) {
 
     let movieDetails = await getDetails(movieId);
 
+    console.log(movieDetails);
+
+    let genresArray = [];
+
+    movieDetails.genres.forEach(genre => {
+        genresArray.push(genre.name);
+    });
+
+    genresArray = genresArray.join(', ');
 
     document.getElementById('modal-title').textContent = movieDetails.title;
-    
-    document.getElementById('modal-img').src = `https://image.tmdb.org/t/p/w500${move.poster_path}`;
-    
-    document.getElementById('movie-modal-paragraph').innerHTML = `<p>Tagline: ${movieDetails.tagline}`;
 
+    document.getElementById('modal-img').src = `https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`;
+
+    document.getElementById('movie-modal-tagline').innerHTML = `<p><strong>Tagline:</strong> ${movieDetails.tagline}</p>`;
+
+    document.getElementById('movie-modal-genres').innerHTML = `<p><strong>Genres:</strong> ${genresArray}</p>`;
+
+    document.getElementById('movie-modal-tagline').innerHTML = `<p><strong>Tagline:</strong> ${movieDetails.tagline}</p>`;
+
+    document.getElementById('movie-modal-release-date').innerHTML = `<p><strong>Release Date:</strong> ${movieDetails.release_date}</p>`;
+
+    let productionCompanies = document.getElementById('movie-modal-production-companies');
+    // movieCompanies.setAttribute('src',`https://api.themoviedb.org/3/movie/${movieId}/images`);
+    let images = '';
+    productionCompanies.innerHTML = '';
+    for (const item of movieDetails.production_companies) {
+        if (item.logo_path) {
+            let img = document.createElement('img');
+            img.src = `https://image.tmdb.org/t/p/w500` + item.logo_path;
+            img.style = 'width:100px;padding:10px;'
+            productionCompanies.appendChild(img);
+        }
+    }
 }

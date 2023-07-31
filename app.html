@@ -119,11 +119,16 @@
                     <h5 id="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body row-cols-auto">
-                   <div class="col">
-                    <img id="modal-img"/>
-                   </div> 
-                   <div class="col"><p id="movie-modal-paragraph"></p></div>
+                <div class="modal-body row row-cols-2">
+                    <div class="col col-12 col-md-6">
+                        <img id="modal-img" class="round-img img-fluid mb-3 mb-md-0" />
+                    </div>
+                    <div class="col col-12 col-md-6">
+                        <p id="movie-modal-tagline"></p>
+                        <p id="movie-modal-genres"></p>
+                        <p id="movie-modal-release-date"></p>
+                        <p id="movie-modal-production-companies"></p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
