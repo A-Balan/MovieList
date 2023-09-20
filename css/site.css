@@ -27,11 +27,14 @@
     --bs-btn-bg: var(--ab-theme-600);
     --bs-btn-border-color: var(--ab-theme-600);
     --bs-btn-hover-bg: var(--ab-theme-700);
+    --bs-btn-active-bg: var(--ab-theme-800);
+    --bs-btn-active-border-color: var(--ab-theme-800);
+
 }
 
 .navbar,
 .footer {
-background-color: var(--ab-theme-800);
+    background-color: var(--ab-theme-800);
 }
 
 .footer {
@@ -59,15 +62,19 @@ footer {
     flex-shrink: 0;
 }
 
-.socialicons {
-    font-size: 1.5rem;
-    padding-left: .5rem;
-    color: var(--ab-theme-700);
-    transition: color 0.2s;
+a {
+    color: rgb(187, 103, 28);
 }
 
-.socialicons:hover {
-    color: yellow;
+.socialIcons {
+    font-size: 1.5rem;
+    transition: color 0.25s;
+    color: var(--ab-theme-300);
+    margin-left: 0.3rem;
+}
+
+.socialIcons:hover {
+    color: #FFF18D;
 }
 
 .checklist i {
@@ -75,14 +82,30 @@ footer {
     padding-right: .5rem;
 }
 
+
 .devicons {
     font-size: 3.5rem;
     padding-left: .2rem;
 }
 
-.round-img {
-    border-radius: 15px;
+.img-round {
+    border-radius: 2rem;
+    max-height: 60vh;
+
 }
+
+.img-shadow {
+    -webkit-box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.75)
+}
+
+.img-round-sm {
+    border-radius: 2rem;
+    max-height: 40vh;
+    margin-top: 2rem;
+}
+
 
 .center-image {
     margin: auto;
